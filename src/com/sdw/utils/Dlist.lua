@@ -1,4 +1,4 @@
---双向队列
+--鍙屽悜闃熷垪
 local Dlist = {}
 
 --[[
@@ -55,7 +55,7 @@ function Dlist.popRight(list)
 end
 
 --[[
-    当前Dlist是否为空
+    褰撳墠Dlist鏄惁涓虹┖
 --]]
 function Dlist.isEmpty(list)
   local first = list.first

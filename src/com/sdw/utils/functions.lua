@@ -1,17 +1,17 @@
---³£ÓÃº¯Êı×Ü½á ÒÔ¼°¶Ôlua±ê×¼¿âµÄÀ©Õ¹
+--å¸¸ç”¨å‡½æ•°æ€»ç»“ ä»¥åŠå¯¹luaæ ‡å‡†åº“çš„æ‰©å±•
 local functions = {}
 
 --[[
-  ³¢ÊÔÊı×Ö×ª»»  Èç¹û×ª»»Ê§°Ü·µ»Ø0
-@param number ´ø×ª»»Êı×Ö
-@param base ½øÖÆÄ¬ÈÏÊ®½øÖÆ
+  å°è¯•æ•°å­—è½¬æ¢  å¦‚æœè½¬æ¢å¤±è´¥è¿”å›0
+@param number å¸¦è½¬æ¢æ•°å­—
+@param base è¿›åˆ¶é»˜è®¤åè¿›åˆ¶
 --]]
 function functions.convertnumber(num,base)
   return tonumber(num,base) or 0
 end
 
 --[[
-³¢ÊÔ½«num×ª»»ÎªÕûÊı Ê§°ÜÔò·µ»Ø0
+å°è¯•å°†numè½¬æ¢ä¸ºæ•´æ•° å¤±è´¥åˆ™è¿”å›0
 --]]
 function functions.converInt(num)
   return math.round(functions.convertnumber(num))

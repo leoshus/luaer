@@ -132,7 +132,7 @@ end
 
 print(main.countBetDate(20150906,20150901,"yyyymmdd")<7 * 24 * 3600)
 
---]==]
+
 
 
 
@@ -178,3 +178,41 @@ print(a,b);
 
 print (loadstring("return 10")())
 
+--]==]
+
+
+
+--[[
+@param str 待分割字符串
+@param delimiter 分割字符
+--]]
+function StringSplit(str,delimiter)
+  if str == nil or str == "" or delimiter == nil then
+    return nil
+  end
+  local result = {}
+  for match in (str .. delimiter):gmatch("(.-)" .. delimiter) do
+    table.insert(result,match)
+  end
+  return result
+end
+local t = StringSplit("/reply/upvote/tech_bbs/BDHK1P3I000915BF_BDHQ2KFI","/");
+print(t[#t]);
+
+
+local t1 = StringSplit("112.80.53.34",",")
+print(t1[1])
+
+
+local t2 = {"157.122.156.98","58.222.139.182"}
+
+function check_blank_Ip (t,ip)
+    for i,v in pairs(t) do
+       if(v == ip) then
+          return true
+       end
+    end
+    return false
+end
+
+print(check_blank_Ip(t2,"58.222.139.183"))

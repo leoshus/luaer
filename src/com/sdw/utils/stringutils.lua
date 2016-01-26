@@ -1,8 +1,8 @@
 local stringutils = {}
 
 --[[
-@param str ´ý·Ö¸î×Ö·û´®
-@param delimiter ·Ö¸î×Ö·û
+@param str å¾…åˆ†å‰²å­—ç¬¦ä¸²
+@param delimiter åˆ†å‰²å­—ç¬¦
 --]]
 function stringutils.split(str,delimiter)
   if str == nil or str == "" or delimiter == nil then
@@ -16,7 +16,7 @@ function stringutils.split(str,delimiter)
 end
 
 --[[
-È¥³ý×Ö·û´®¿Õ¸ñ
+åŽ»é™¤å­—ç¬¦ä¸²ç©ºæ ¼
 --]]
 function stringutils.trim(str)
   if str == nil or tostring(str) == "userdata: NULL" then

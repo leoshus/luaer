@@ -8,13 +8,13 @@ function split(s, p)
   string.gsub(s, '[^'..p..']+', function(w) table.insert(sen_list, w) end )
   return sen_list
 end
--- 根据key hash redis 实例
+-- 鏍规嵁key hash redis 瀹炰緥
 local function init_flexihash(parameters)
   flexihash = Flexihash.New();
   flexihash:addTargets(redis_server)
 end
 
--- 根据key hash redis 实例
+-- 鏍规嵁key hash redis 瀹炰緥
 function get_redis_cli(key)
   if (flexihash == nil) then
     init_flexihash();
