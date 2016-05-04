@@ -31,8 +31,9 @@ else
   print("occur error")
 end
 xpcall(function(i) error("test xpcall")end,function() print(debug.traceback())end,23)
-]]--
---原表操作
+
+
+--元表操作
 local t = {10,20,30}
 setmetatable(t,{
   __call = function(t1,t2)
@@ -55,6 +56,30 @@ setmetatable(t,{
 })   
 
 print(t({10,20}))
+
+
+-- __add method
+local set1 = {}
+local set2 = {10,20,30}
+setmetatable(set1,{__add = function (s1,s2)
+  for k,v in pairs(s2) do
+    s1[k] = v
+  end
+  return s1
+end})
+local set = set2 + set1
+for k,v in pairs(set) do
+  print (k .. "->" ..v)
+end
+
+
+]]--
+
+local ffi = require("ffi")
+ffi.cdef[[
+int printf(const char *fmt, ...);
+]]
+ffi.C.printf("Hello %s!", "world")
 
 
 
