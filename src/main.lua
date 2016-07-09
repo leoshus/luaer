@@ -5,6 +5,7 @@ local dateUtils = require ("com.sdw.utils.dateutils")
 local dlist = require("com.sdw.utils.Dlist")
 local set = require("com.sdw.utils.Set")
 local weakList = require("com.sdw.utils.weakList")
+local map = require("com.sdw.utils.map")
 
 function printf(fmt, ...)
     print(string.format(tostring(fmt), ...))
@@ -197,11 +198,11 @@ function StringSplit(str,delimiter)
   return result
 end
 local t = StringSplit("/reply/upvote/tech_bbs/BDHK1P3I000915BF_BDHQ2KFI","/");
-print(t[#t]);
+--print(t[#t]);
 
 
 local t1 = StringSplit("112.80.53.34",",")
-print(t1[1])
+--print(t1[1])
 
 
 local t2 = {"157.122.156.98","58.222.139.182"}
@@ -215,4 +216,29 @@ function check_blank_Ip (t,ip)
     return false
 end
 
-print(check_blank_Ip(t2,"58.222.139.183"))
+--print(check_blank_Ip(t2,"58.222.139.183"))
+local comments = {}
+local t = {1,2,3,7,"one","two","three"}
+setmetatable(comments,{__len = function() return #t; end,__index=function()return 11;end})
+print(#comments)
+print(comments[0])
+
+
+
+setmetatable(t, {__len = function (t)
+  local cnt = 0
+  for k,v in pairs(t) do
+    if type(v) == "number" then 
+      cnt = cnt + 1
+      print(k,v)
+    end
+  end
+  return cnt
+end})
+
+-- 结果是 6 而不是预期中的 3
+print(#t)   --> 6 
+
+local cs = map.new()
+cs.put("key","value");
+print(cs.get("key"))
