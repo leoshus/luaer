@@ -1,6 +1,6 @@
 local functions = require("tutorial.functions")
 
---[[
+--[==[
 
 --可变长度参数 函数
 functions.func("a","b","c")
@@ -73,8 +73,6 @@ for k,v in pairs(set) do
 end
 
 
-]]--
-
 local ffi = require("ffi")
 ffi.cdef[[
 int printf(const char *fmt, ...);
@@ -82,47 +80,73 @@ int printf(const char *fmt, ...);
 ffi.C.printf("Hello %s!", "world")
 
 
+a = 1;
+print(_G["a"])
+setmetatable(_G,{
+  __index=function(_,k)
+    error("can't read _G" .. k)
+  end,
+  __newindex = function(_,_,k)
+    local w = debug.getinfo(2,"S").what
+    if w ~= "main" and w ~= "C" then
+      error("cat't create data for _G")
+    end
+    rawset(t,n,v)
+  end
+})
+b=3
+--_G["b"] = 2
+print(rawget(_G,"a"))
 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--local a = _G[a]
+for n in pairs(_G) do
+  print(n)
+end
+]==]--
 
 
+a = 1
+local env = {}
+setmetatable(env,{__index = _G})
+setfenv(1,env)
+print(a)
+
+function factory ()
+  local a = 0
+  return function()
+    a = a + 1
+    return a
+  end
+end
+a=2
+f1 = factory()
+setfenv(f1,{a=10})
+f2 = factory()
+f3 = factory()
+print(f1(),f2(),f3(),f3())
+
+local router = require "tutorial.Router"
+local r = router:new({name="Tom"})
+r:peek()
+
+router:new({name="Rose"}):peek()
+
+function test(param)
+  return param
+end
+
+local ok,err = pcall(test,123)
+print(err)
 
 
+print(unpack(package.preload))
 
+print(unpack(package.loaded))
+print(unpack(package.loaders))
 
-
-
-
-
-
-
-
-
-
-
+print((package.loaded["tutorial.functions"])["foo"]())
+print(package.path)
+print(package.cpath)
 
 
 
