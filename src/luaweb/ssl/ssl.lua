@@ -54,7 +54,6 @@ local cert_der_data = nil
 local res ,err = redisClient:exec("hmget",server_name,"key_data","cert_data")
 if res then
   for k,v in pairs(res) do
-  ngx.log(ngx.ERR,"res start------",i,v)
     if k and k == 1 and not v and v ~= "null" then
        key_data = v
     else
