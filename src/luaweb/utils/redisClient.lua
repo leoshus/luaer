@@ -6,7 +6,7 @@
 
 local redisClient = {}
 local redis = require "resty.redis"
-local response = rqeuire ("luaweb.vo.response"):new()
+local response = require ("luaweb.vo.response"):new()
 local redis_max_expires = 3 * 60 * 60
 local redis_max_conn = 200
 
@@ -19,7 +19,9 @@ local function getRedisConnection(hostInfo)
     if not ok then
         response:exit({code=500,message="Redis connect err " .. err})
     end
-    local res,err = red:auth(hostInfo.hostPasswd)
+    if hostInfo ~= "" then
+      local res,err = red:auth(hostInfo.hostPasswd)
+    end
     return red
 end
 
