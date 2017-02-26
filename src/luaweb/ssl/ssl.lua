@@ -1,7 +1,7 @@
 --[[
   author by soniceryd
   Date:2017/02/26
-  Desc:redis client
+  Desc:ssl save in redis
 ]]--
 
 local ssl = require "ngx.ssl"
