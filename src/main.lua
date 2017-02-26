@@ -179,7 +179,7 @@ print(a,b);
 
 print (loadstring("return 10")())
 
---]==]
+
 
 
 
@@ -242,3 +242,15 @@ print(#t)   --> 6
 local cs = map.new()
 cs.put("key","value");
 print(cs.get("key"))
+
+--]==]
+
+local response_status = {notFound=function()
+  return 404,"resouce not found";
+end}
+
+print(response_status.notFound())
+
+
+require"luaweb.classic.object":new()
+
