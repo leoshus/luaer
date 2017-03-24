@@ -12,3 +12,18 @@ if not ssl_session_id then
   return
 end
 
+local session = fetchSession(ssl_session_id)
+if not session then
+  ngx.log(ngx.ERR,"fail to fetch session from internal-cache by ssl_session_id=",ssl_session_id)
+  return
+end
+
+local ok,err = ssl_session.set_serialized_session(session)
+if not ok then
+  ngx.log(ngx.ERR,"fail to set ssl_sesion for ssl_session_id:",ssl_session_id," cause by :",err)
+  return
+end
+
+function fetchSession(ssl_session_id)
+  return redisClient:exec("get",ssl_session_id)
+end
