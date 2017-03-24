@@ -1,6 +1,7 @@
 # Compiled Lua sources
 luac.out
 .settings/
+.idea/
 .project
 *.iml
 .classpath
