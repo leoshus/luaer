@@ -30,6 +30,7 @@ fakeData.configuration = {
     ["badExpires"] = 2 * 60 * 60, --封禁时长
     ["whiteIp"] = {""},
     ["blackIp"] = {""},
+    ["rexIp"] = {""},
 -- fake json
     ["fakeJson"] = [[
                 {
@@ -84,11 +85,14 @@ function fakeData.coreLogic()
     end
 
     if myIp ~= nil then
-        local match = ngx.re.match(myIp,"106\\.75.+","o")
-        if match or check_black_Ip(fakeData.configuration["blackIp"],myIp)then
-            ngx.log(ngx.ERR,"FIND FORBBIDEN IP:" .. myIp)
-            response:write(fakeData.configuration["fakeJson"],"application/json;charset=UTF-8")
+        for _,v in pairs(fakeData.configuration["rexIp"]) do
+            local match = ngx.re.match(myIp,v,"o")
+            if match or check_black_Ip(fakeData.configuration["blackIp"],myIp)then
+                ngx.log(ngx.ERR,"FIND FORBBIDEN IP:" .. myIp)
+                response:write(fakeData.configuration["fakeJson"],"application/json;charset=UTF-8")
+            end
         end
+
         local accKey = accIp .. ":" .. myIp
         local badIp = denyIp .. ":" .. myIp
         local badRate = redisClient:exec("get",badIp)
