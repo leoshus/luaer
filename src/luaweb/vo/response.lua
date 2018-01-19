@@ -59,7 +59,12 @@ end
     ngx.say(res_format(json.encode(self.res)))
     ngx.exit(ngx.HTTP_OK)
   end
-  
+
+function response:write(msg,content_type)
+    ngx.header["content-type"]=content_type
+    ngx.say(msg)
+    ngx.exit(ngx.HTTP_OK)
+end
   function response:new()
     local instance = {
       version = "0.0.1",
